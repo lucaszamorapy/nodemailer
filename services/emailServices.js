@@ -4,6 +4,13 @@ require("dotenv").config();
 
 const sendEmail = async (req) => {
   const { name, email, phone, mobile, subject, message } = req;
+
+  if (!name || !email || !phone || !mobile || !subject) {
+    return {
+      success: false,
+      message: "Preencha todos os campos!",
+    };
+  }
   try {
     await ContactMessage.create({
       name,
